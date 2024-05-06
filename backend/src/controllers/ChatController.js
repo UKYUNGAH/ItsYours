@@ -52,11 +52,13 @@ const getChatroomList = async (req, res, next) => {
 		if (!member) {
 			throw new NotFoundError('회원 정보를 찾을 수 없습니다.');
 		}
+
 		// 사용자의 실제 ID를 사용하여 채팅방 목록 불러오기
 		const chatList = await chatService.getChatroomListWithFilter(member._id);
 		if (!chatList || chatList.length === 0) {
 			throw new NotFoundError('채팅 목록이 없습니다.');
 		}
+
 		res.status(200).json(chatList);
 	} catch (err) {
 		next(err);

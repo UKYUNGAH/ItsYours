@@ -15,7 +15,6 @@ async function createPost(title, content, nickName, profilePic, schoolName, phot
 		schoolName: schoolName,
 		photos: photos,
 	};
-	console.log(newPostData);
 	const createPost = await Posts.create(newPostData);
 	return createPost;
 }

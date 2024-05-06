@@ -19,7 +19,7 @@ import {
 } from './ChatRoomHeaderStyle';
 import { quitChat, getChatDetail, getChatList } from '../../../apis/service/Chat.api';
 
-function ChatRoomHeader({ userInfo, productInfo }) {
+function ChatRoomHeader({ userInfo, productInfo, myInfo }) {
 	const [profileModalOpen, setProfileModalOpen] = useState(false);
 	const [chatroomId, setChatRoomId] = useState(''); //채팅방Id
 
@@ -41,7 +41,7 @@ function ChatRoomHeader({ userInfo, productInfo }) {
 					</Profile>
 					<Wrap>
 						<NickName>{userInfo.nickName}</NickName>
-						<MenuButtonComponent userInfo={userInfo} productInfo={productInfo} />
+						<MenuButtonComponent userInfo={userInfo} productInfo={productInfo} myInfo={myInfo} />
 					</Wrap>
 				</SellerProfile>
 				<BookInfo>
@@ -57,7 +57,7 @@ function ChatRoomHeader({ userInfo, productInfo }) {
 					</TextWrap>
 				</BookInfo>
 			</ChatRoomHeaderWrap>
-			<ProfileModal isOpen={profileModalOpen} onClose={closeProfileModal} />
+			<ProfileModal userInfo={userInfo} isOpen={profileModalOpen} onClose={closeProfileModal} />
 		</>
 	);
 }

@@ -30,11 +30,10 @@ function ChatList() {
 					res.map(async chatRoomList => {
 						// console.log('각 채팅방 id', chatRoomList._id);
 						const detailRes = await getChatDetail(chatRoomList._id);
-						console.log('상세', detailRes);
-						console.log('id', detailRes.buyerInfo.id);
-						console.log('id', detailRes.sellerInfo.id);
+						console.log('id1', detailRes.buyerInfo.id);
+						console.log('id2', detailRes.sellerInfo.id);
 
-						if (id === detailRes.buyerInfo.id) {
+						if (id == detailRes.buyerInfo.id) {
 							usersIds.push(detailRes.sellerInfo);
 						} else {
 							usersIds.push(detailRes.buyerInfo);
@@ -46,6 +45,8 @@ function ChatList() {
 				setuserInfo(usersIds);
 				setProductInfo(productIds);
 				setIsLoaded(true);
+				console.log(userInfo);
+				console.log(productInfo);
 			} catch (error) {
 				console.error('오류가 발생했습니다	:', error);
 			}
@@ -76,8 +77,8 @@ function ChatList() {
 							}}
 						>
 							<ChatListProfile
-								userInfo={userInfo}
-								productInfo={productInfo}
+								userInfo={userInfo[i]}
+								productInfo={productInfo[i]}
 								product={chatRoomList.productId}
 							/>
 						</div>

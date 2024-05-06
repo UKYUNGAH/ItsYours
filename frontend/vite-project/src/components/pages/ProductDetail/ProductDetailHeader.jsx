@@ -48,9 +48,9 @@ function ProductDetailHeader() {
 	async function handleChatButtonClick() {
 		console.log(product);
 		const res = await createChatroom(productId, product._id, id);
-		console.loog(res.data);
 		const chatroomId = res._id;
-		navigate(`/chat/${chatroomId}`); // 채팅 화면으로 이동
+		console.log(chatroomId);
+		await navigate(`/chat`); // 채팅 화면으로 이동
 	}
 
 	// 디테일 이미지 잘나오게 하는 부분 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

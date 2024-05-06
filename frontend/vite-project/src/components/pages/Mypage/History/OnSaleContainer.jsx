@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { SalesHistoryWrap, ForSalesList, OnSaleVoid } from './OnSaleContainerStyle';
 import OnSaleCard from '../../../MypageHistoryCard/OnSaleCard';
 import { fetchOnSaleItems, deleteSaleItem } from '../../../../apis/service/OnSaleApi';
-// import { fetchOnSaleItems, deleteSaleItem } from './OnSaleApi';
+
 const OnSaleContainer = () => {
 	const [saleItems, setSaleItems] = useState([]);
 	const { id } = useParams();
@@ -12,7 +12,7 @@ const OnSaleContainer = () => {
 		if (id) {
 			fetchOnSaleItems(id)
 				.then(data => {
-					// isCompleted가 false이고, deletedAt이 null인 항목만 필터링
+					// isCompleted가 false이고, deletedAt이 null인 항목만 필터링 하세요
 					const validItems = data.filter(
 						item => item.isCompleted === false && item.deletedAt == null,
 					);

@@ -13,7 +13,6 @@ async function createChatroom(buyerId, productId, sellerId) {
 		buyerId: buyerId,
 		createdAt: new Date(),
 	};
-	console.log('newData', newRoomData);
 	const createChatroom = await Chatroom.create(newRoomData);
 	return createChatroom;
 }
@@ -35,7 +34,6 @@ async function getChatroomList(memberId) {
 	const chatList = await Chatroom.find({
 		productId: { $in: productIds },
 	});
-
 	return chatList;
 }
 

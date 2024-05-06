@@ -24,7 +24,6 @@ async function sendCustomEmail({ to, subject, templateName, replacements }) {
 		// replacements 객체에 있는 모든 키-값 쌍을 사용하여 템플릿 내용을 치환
 		Object.keys(replacements).forEach(key => {
 			const regex = new RegExp(`{{${key}}}`, 'g'); // 정규 표현식 사용
-			console.log(`Replacing: ${key} with: ${replacements[key]}`); // 치환 과정 로깅
 			html = html.replace(regex, replacements[key]);
 		});
 
@@ -36,7 +35,6 @@ async function sendCustomEmail({ to, subject, templateName, replacements }) {
 		};
 
 		const result = await transporter.sendMail(mailOptions);
-		console.log('Email sent:', result);
 		return result;
 	} catch (error) {
 		console.error('Failed to send email:', error);

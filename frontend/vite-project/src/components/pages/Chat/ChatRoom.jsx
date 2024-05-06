@@ -37,6 +37,8 @@ function ChatRoom() {
 
 	const [userInfo, setUserInfo] = useState([]);
 	const [productInfo, setProductInfo] = useState([]);
+	const [myInfo, setMuInfo] = useState();
+
 	// 입력창 포커스 관리 핸들러
 	const handleFocus = () => {
 		setIsInputFocused(true);
@@ -64,27 +66,18 @@ function ChatRoom() {
 	function onChange(e) {
 		setSendMes(e.target.value);
 	}
-
-	// const getRoom = async () => {
-	// 	const res = await getChatDetail(chatroomId);
-	// 	console.log('내가 누른', res);
-	// 	setIsLoaded(true);
-	// 	setUserInfo(res.chatroom.buyerId);
-	// 	setProductInfo(res.chatroom.productId);
-	// 	setReceivedMes(res.messages);
-	// 	console.log(res.messages.content);
-	// }
-
 	useEffect(() => {
 		async function getRoom() {
-			console.log('챗룸', chatroomId);
+			// console.log('챗룸', chatroomId);
 			const res = await getChatDetail(chatroomId);
-			console.log('내가 누른', res);
+			// console.log('내가 누른', res);
 			setIsLoaded(true);
 			if (id === res.buyerInfo.id) {
 				setUserInfo(res.sellerInfo);
+				setMuInfo(res.buyerInfo._id);
 			} else {
 				setUserInfo(res.buyerInfo);
+				setMuInfo(res.sellerInfo._id);
 			}
 			setProductInfo(res.product);
 			setReceivedMes(res.messages);
@@ -107,7 +100,7 @@ function ChatRoom() {
 			{isLoaded && (
 				<ChatRoomWrap>
 					<ChatSction>
-						<ChatRoomHeader userInfo={userInfo} productInfo={productInfo} />
+						<ChatRoomHeader userInfo={userInfo} productInfo={productInfo} myInfo={myInfo} />
 						<ChatContainer>
 							<ChatDate>채팅방이 생성되었습니다.</ChatDate>
 							<ChatWrap>

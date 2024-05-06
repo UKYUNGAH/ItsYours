@@ -3,9 +3,9 @@ import ReportModal from './ReportModal';
 import ToastPopup from '../../TostPopUp';
 import Modal from '../../Modal';
 import { MenuButton, Img, Menu, MenuItem } from './ChatRoomHeaderStyle';
-import { thumbUp, thumbDown, confirmBuying } from '../../../apis/service/Chat.api';
+import { thumbUp, thumbDown, confirmBuying, quitChat } from '../../../apis/service/Chat.api';
 
-function MenuButtonComponent({ userInfo, productInfo }) {
+function MenuButtonComponent({ userInfo, productInfo, myInfo }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [reportModalOpen, setReportModalOpen] = useState(false);
 	const [toastMessage, setToastMessage] = useState(''); // 토스트 메시지 상태 추가
@@ -37,6 +37,15 @@ function MenuButtonComponent({ userInfo, productInfo }) {
 		confirmBuying(productInfo._id);
 		setBuyUserModalOpen(false);
 		setLeaveRoomModalOpen(false);
+		navigate('/');
+	};
+
+	const quitRoom = async () => {
+		console.log(productInfo._id, userInfo);
+		await quitChat(productInfo._id, userInfo._id, myInfo);
+		setBuyUserModalOpen(false);
+		setLeaveRoomModalOpen(false);
+		navigate('/');
 	};
 
 	const handleToastMessage = message => {
@@ -99,7 +108,7 @@ function MenuButtonComponent({ userInfo, productInfo }) {
 					정말로 나가시겠어요?
 				</>
 				confirmText="나가기"
-				onConfirm={handleCloseModal}
+				onConfirm={quitRoom}
 			/>
 		</>
 	);
